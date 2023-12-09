@@ -1,0 +1,56 @@
+	ORG 0
+CHK,	BUN SML
+
+;stores the value into array B
+STO,	STA PTB I	
+	ISZ PTA
+	ISZ PTB
+	ISZ CTR
+	BUN CHK
+	HLT
+
+;checks if value > 200 (X-200)
+BIG,	LDA 2HN
+	CMA
+	INC
+	ADD PTA I
+	SNA
+	BUN LAR ;+ve = x>200
+	BUN NUM ;-ve = x<200 (remains)
+
+;checks if value < 100 (X-100)
+SML,	LDA HUN
+	CMA
+	INC
+	ADD PTA I
+	SPA
+	BUN MIN ;-ve = x<100
+	BUN BIG ;+ve = need to check x>200
+
+MIN,	LDA HUN
+	BUN STO
+
+LAR,	LDA 2HN
+	BUN STO
+
+NUM,	LDA PTA I
+	BUN STO
+
+PTA,	DEC 40
+PTB,	DEC 45
+CTR,	DEC -5
+HUN,	DEC 100
+2HN,	DEC 200
+
+	ORG 40
+ArA,	DEC -10
+	DEC 50
+	DEC 150
+	DEC 200
+	DEC 300
+ArB,	DEC 0
+	DEC 0
+	DEC 0
+	DEC 0
+	DEC 0
+	END
